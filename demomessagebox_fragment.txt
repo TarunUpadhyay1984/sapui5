@@ -1,0 +1,39 @@
+jQuery.sap.require("sap.m.MessageBox");
+sap.ui.jsfragment("demomessagebox.firstview",{
+	
+	createContent: function(oController){
+		var oBox = new sap.m.VBox({
+			 items:[ new sap.m.Text({
+				 text:"Hello World"
+			         }),
+			         new sap.m.CheckBox({
+			        	 id:"checkBoxId1",
+			        	 text: "This checkbox is not selected"
+			         }),
+			         new sap.m.CheckBox({
+			        	 id:"checkBoxId2",
+			        	 text:"This Checkbox is selected",
+			        	 selected:"true"
+			         })]
+		});	
+		
+		var oCheck = sap.ui.getCore().byId("checkBoxId2");
+		
+		sap.m.MessageBox.show(oBox,{
+			icon: sap.m.MessageBox.Icon.WARNING,
+			title: "Information Selection for Checkboxes",
+			actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+			onClose: function (oAction) {
+		        if (oAction === sap.m.MessageBox.Action.YES) {
+		            var sText = "Checkbox is " + (oCheck.getSelected() ? "" : "not ") + "checked";
+		            sap.m.MessageBox.alert(sText, {
+		              title: "Result of CheckBox"
+		        });
+		       }
+				
+			}
+			
+		})
+	}
+
+})
